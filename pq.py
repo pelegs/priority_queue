@@ -5,6 +5,38 @@ import numpy as np
 from queue import PriorityQueue
 
 
+#############
+# Constants #
+#############
+
+DIM = 2
+
+
+####################
+# Helper functions #
+####################
+
+def time_to_pp_collision(p1, p2):
+    """
+    Returns time to collision between
+    two particles p1, p2.
+    """
+    dx02 = np.linalg.norm(p1.pos - p2.pos)**2
+    dv2 = np.linalg.norm(p1.v - p2.v)**2
+    R2 = (p1.radius + p2.radius)**2
+    desc = np.dot(dx0, dv)**2 - dv2*(dx02 - R2)
+    if desc >= 0 and dv2 != 0:
+        p = (np.dot(dx0, dv) + np.sqrt(desc))/dv2
+        m = (np.dot(dx0, dv) - np.sqrt(desc))/dv2
+        return min(p, m)
+    else:
+        return None
+
+
+###########
+# Classes #
+###########
+
 class Particle:
     def __init__(self, pos, vel, mass=1, radius=1):
         self.pos = pos
@@ -12,9 +44,6 @@ class Particle:
         self.mass = mass
         self.radius = radius
 
-
-def time_to_pp_collision(p1, p2):
-    pass
 
 def pp_collision(p1, p2):
     x1, x2 = p1.pos, p2.pos
