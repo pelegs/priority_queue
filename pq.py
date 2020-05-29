@@ -32,20 +32,11 @@ def time_to_pp_collision(p1, p2):
     else:
         return None
 
-
-###########
-# Classes #
-###########
-
-class Particle:
-    def __init__(self, pos, vel, mass=1, radius=1):
-        self.pos = pos
-        self.vel = vel
-        self.mass = mass
-        self.radius = radius
-
-
 def pp_collision(p1, p2):
+    """
+    Returns the new velocities after
+    a particle-particle collision.
+    """
     x1, x2 = p1.pos, p2.pos
     dx = x1 - x2
     v1, v2 = p1.vel, p2.vel
@@ -60,9 +51,24 @@ def pp_collision(p1, p2):
 
     return u1, u2
 
+
+###########
+# Classes #
+###########
+
+class Particle:
+    def __init__(self, pos, vel, mass=1, radius=1):
+        self.pos = pos
+        self.vel = vel
+        self.mass = mass
+        self.radius = radius
+
+
 class Event:
-    def __init__(self, time):
+    def __init__(self, time, obj1, obj2):
         self.time = time
+        self.obj1 = obj1
+        self.obj2 = obj2
         self.valid = True
 
     def invalidate(self):
@@ -71,6 +77,10 @@ class Event:
     def print(self):
         print(self.time)
 
+    """
+    Comparing between events is done
+    via their time.
+    """
     def __lt__(self, event):
         return self.time < event.time
 
@@ -90,7 +100,12 @@ class Event:
         return self.time >= event.time
 
 
+########
+# Main #
+########
+
 if __name__ == '__main__':
+    """
     q = PriorityQueue()
     bars = [foo(np.random.uniform(-1,1)) for _ in range(15)]
     for bar in bars:
@@ -98,3 +113,5 @@ if __name__ == '__main__':
 
     while not q.empty():
         q.get().print()
+    """
+    print('at the moment doing nothing!')
