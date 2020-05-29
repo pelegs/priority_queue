@@ -5,7 +5,7 @@ import numpy as np
 from queue import PriorityQueue
 
 
-class particle:
+class Particle:
     def __init__(self, pos, vel, mass=1, radius=1):
         self.pos = pos
         self.vel = vel
@@ -31,30 +31,34 @@ def pp_collision(p1, p2):
 
     return u1, u2
 
-class foo:
-    def __init__(self, rate):
-        self.rate = rate
+class Event:
+    def __init__(self, time):
+        self.time = time
+        self.valid = True
+
+    def invalidate(self):
+        self.valid = False
 
     def print(self):
-        print(self.rate)
+        print(self.time)
 
-    def __lt__(self, obj):
-        return self.rate < obj.rate
+    def __lt__(self, event):
+        return self.time < event.time
 
-    def __le__(self, obj):
-        return self.rate <= obj.rate
+    def __le__(self, event):
+        return self.time <= event.time
 
-    def __eq__(self, obj):
-        return self.rate == obj.rate
+    def __eq__(self, event):
+        return self.time == event.time
 
-    def __ne__(self, obj):
-        return self.rate != obj.rate
+    def __ne__(self, event):
+        return self.time != event.time
 
-    def __gt__(self, obj):
-        return self.rate > obj.rate
+    def __gt__(self, event):
+        return self.time > event.time
 
-    def __ge__(self, obj):
-        return self.rate >= obj.rate
+    def __ge__(self, event):
+        return self.time >= event.time
 
 
 if __name__ == '__main__':
