@@ -64,17 +64,18 @@ Two spherical particles with radii $R_{1}$ and $R_{2}$, have initial positions $
 \begin{figure}[H]
 	\centering
 	\begin{tikzpicture}
+		\Large
 		\coordinate (x1) at (0,0);
-		\draw[thick, fill=black!20] (x1) circle (1);
+		\draw[thick, fill=col1!20] (x1) circle (1.2);
 		\fill[black] (x1) circle (0.05);
-		\draw[->, >=stealth, thick] (x1) -- ++(1,1) node [above right] {$\bm{v}_{1}$};
-		\draw[dashed, thick] (x1) -- ++(-1,0) node [midway, above] {$R_{1}$};
+		\draw[vector, col1] (x1) -- ++(1,2) node [above right] {$\bm{v}_{1}$};
+		\draw[dashed, thick] (x1) -- ++(-1.2,0) node [midway, above] {$R_{1}$};
 		\node at (0.2,-0.2) {$\bm{x}^{0}_{1}$};
 		
 		\coordinate (x2) at (5,-1.5);
-		\draw[thick, fill=black!20] (x2) circle (1.5);
+		\draw[thick, fill=col2!20] (x2) circle (1.5);
 		\fill[black] (x2) circle (0.05);
-		\draw[->, >=stealth, thick] (x2) -- ++(-2,3) node [above right] {$\bm{v}_{2}$};
+		\draw[vector, col2] (x2) -- ++(-2,3) node [above right] {$\bm{v}_{2}$};
 		\draw[dashed, thick] (x2) -- ++(-1.5,0) node [midway, below] {$R_{2}$};
 		\node at ($(x2)+(0.2,-0.2)$) {$\bm{x}^{0}_{2}$};
 	\end{tikzpicture}
@@ -137,10 +138,37 @@ or in explicit vector form
 	\centering
 	\tdplotsetmaincoords{110}{20}
 	\begin{tikzpicture}[tdplot_main_coords]
+		\Large
 		\draw[thick, dashed, cap=round, fill=col3, opacity=0.3] (-3,-3,0) -- (3,-3,0) -- (3,3,0) -- (-3,3,0) -- cycle;
 		\draw[vector, col2] (0,0,0) -- (2,1,3) node [midway, above left] {$\bm{v}'$};
 		\draw[vector, col4] (0,0,0) -- (0,0,1) node [midway, above right] {$\hat{\bm{n}}$};
 		\draw[vector, col1] (-2,-1,3) -- (0,0,0) node [midway, above right] {$\bm{v}$};
 	\end{tikzpicture}
 \end{figure}
+
+\subsection{Time to Collision}
+Using point-plane distance.
+
+\subsection{Velocity Change}
+The projection of $\bm{v}$ onto $\bm{\hat{n}}$ is
+\begin{equation}
+	\text{proj}_{\bm{\hat{n}}}\bm{v} = \innerp{\bm{v}}{\bm{\hat{n}}}\bm{\hat{n}},
+	\label{eq:proj_v_n}
+\end{equation}
+and on a direction orthogonal to $\bm{\hat{n}}$ is
+\begin{equation}
+	\bm{v} - \innerp{\bm{v}}{\bm{\hat{n}}}\bm{\hat{n}}.
+	\label{eq:proj_v_perp_n}
+\end{equation}
+$\bm{v}$ can be reconstructed from these two components,
+\begin{equation}
+	\bm{v} = \innerp{\bm{v}}{\bm{\hat{n}}}\bm{\hat{n}} + \bm{v} - \innerp{\bm{v}}{\bm{\hat{n}}}\bm{\hat{n}}.
+	\label{eq:v_by_components}
+\end{equation}
+Similarly, $\bm{v}'$ has the $\bm{\hat{n}}$ opposite and equal in magnitude to that of $\bm{v}$, and the orthogonal component equal to that of $\bm{v}$, yielding
+\begin{align}
+	\bm{v}' &= -\innerp{\bm{v}}{\bm{\hat{n}}}\bm{\hat{n}} + \bm{v} - \innerp{\bm{v}}{\bm{\hat{n}}}\bm{\hat{n}}\nonumber\\
+	&= \bm{v} - 2\innerp{\bm{v}}{\bm{\hat{n}}}\bm{\hat{n}}.
+	\label{eq:v_prime}
+\end{align}
 \end{document}
