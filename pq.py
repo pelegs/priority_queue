@@ -63,6 +63,40 @@ def pp_collision(p1, p2):
 
     return u1, u2
 
+
+def time_to_pw_collision(p, w):
+    """
+    Returns the time at which the particle
+    p collides with the wall w.
+    """
+    p0 = w.center
+    n = w.normal
+    l = p.vel
+    l0 = p.pos
+    l_n = np.dot(l, n)
+    if l_n == 0:
+        return np.Inf
+    else:
+        # Time to collision
+        t = ((p0-l0)*n) / np.dot(l, n)
+
+        # Position of collision
+        d = l0 + l*t
+
+        # Verifiying that d is inside the wall
+        # by projecting the vector from d to
+        # the center of the wall on the wall's
+        # direction vectors.
+        D = d - p0
+        a = np.dot(D, normalize(w.d1))
+        b = np.dot(D, normalize(w.d2))
+
+        # Return t if D is inside the wall, inf otherwise.
+        if a <= np.linalg.norm(w.d1) and b <= np.linalg.norm(w.d2):
+            return t
+        else:
+            return np.Inf
+
 def pw_collision(p, w):
     """
     Return the new particle velocity
@@ -87,8 +121,8 @@ class Particle:
 
 
 class Wall:
-    def __init__(self, pos, d1, d2):
-        self.pos = pos
+    def __init__(self, center, d1, d2):
+        self.center = center
         self.d1 = d1
         self.d2 = d2
         self.normal = normalize(np.cross(d1, d2))
