@@ -12,6 +12,17 @@ from queue import PriorityQueue
 DIM = 2
 
 
+##################
+# Math functions #
+##################
+
+def normalize(vec):
+    try:
+        return vec / np.linalg.norm(vec)
+    except:
+        return 0.0
+
+
 ####################
 # Helper functions #
 ####################
@@ -25,6 +36,7 @@ def time_to_pp_collision(p1, p2):
     dv2 = np.linalg.norm(p1.v - p2.v)**2
     R2 = (p1.radius + p2.radius)**2
     desc = np.dot(dx0, dv)**2 - dv2*(dx02 - R2)
+
     if desc >= 0 and dv2 != 0:
         p = (np.dot(dx0, dv) + np.sqrt(desc))/dv2
         m = (np.dot(dx0, dv) - np.sqrt(desc))/dv2
@@ -51,6 +63,16 @@ def pp_collision(p1, p2):
 
     return u1, u2
 
+def pw_collision(p, w):
+    """
+    Return the new particle velocity
+    after a collision with a wall.
+    """
+    return p.vel - 2*np.dot(p.vel, w.normal)*w.normal
+
+def bla(d, n):
+    return d - 2*np.dot(d, n)*n
+
 
 ###########
 # Classes #
@@ -62,6 +84,14 @@ class Particle:
         self.vel = vel
         self.mass = mass
         self.radius = radius
+
+
+class Wall:
+    def __init__(self, pos, d1, d2):
+        self.pos = pos
+        self.d1 = d1
+        self.d2 = d2
+        self.normal = normalize(np.cross(d1, d2))
 
 
 class Event:
@@ -114,4 +144,8 @@ if __name__ == '__main__':
     while not q.empty():
         q.get().print()
     """
+    d = np.array([2,1,-3])
+    n = np.array([0,0,1])
+    r = bla(d, n)
+    print(r)
     print('at the moment doing nothing!')
