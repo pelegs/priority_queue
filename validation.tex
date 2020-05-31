@@ -1,0 +1,87 @@
+\documentclass{standalone}
+\usepackage{tikz}
+\tikzset{vector/.style={->, >=stealth, very thick, cap=round}}
+\definecolor{col0}{HTML}{FFFFFF}
+\definecolor{col1}{HTML}{FF7878}
+\definecolor{col2}{HTML}{51B5F8}
+\definecolor{col3}{HTML}{68E1AA}
+\definecolor{col4}{HTML}{B869EA}
+\definecolor{col5}{HTML}{FF5500}
+\definecolor{col6}{HTML}{FF7878}
+\definecolor{col7}{HTML}{FF7500}
+\definecolor{col8}{HTML}{FF4F93}
+
+\usepackage{pythontex}
+
+\begin{document}
+\tikzset{
+	vector/.style={->, >=stealth, very thick, cap=round},
+	dline/.style={dotted, cap=round}
+}
+
+\begin{pycode}
+from math import inf
+from libpq import *
+
+t = inf
+while t == inf or t < 0.5 or t > 10:
+		p1 = Particle(
+						pos = np.zeros(2),
+						vel = np.random.uniform(-2, 2, 2),
+						radius = np.random.uniform(0.2, 2),
+						)
+		p2 = Particle(
+						pos = np.random.uniform(-20, 20, 2),
+						vel = np.random.uniform(-1, 1, 2),
+						radius = np.random.uniform(0.2, 2),
+						)
+		p1.mass = p1.radius
+		p2.mass = p2.radius
+
+		t = time_to_pp_collision(p1, p2)
+
+# Params before
+x1, y1 = p1.pos
+v1x, v1y = p1.vel
+m1, R1 = p1.mass, p1.radius
+x2, y2 = p2.pos
+v2x, v2y = p2.vel
+m2, R2 = p2.mass, p2.radius
+
+# Params after
+p1.move(t)
+p2.move(t)
+x1_, y1_ = p1.pos
+x2_, y2_ = p2.pos
+u1, u2 = pp_collision(p1, p2)
+v1_x, v1_y = u1
+v2_x, v2_y = u2
+
+drawstr = """
+\\begin{{tikzpicture}}
+	\\draw[dline] ({},{}) -- ({},{});
+	\\draw[dline] ({},{}) -- ({},{});
+	\\draw[draw=col1, fill=col1!30] ({},{}) circle ({});
+	\\draw[draw=col2, fill=col2!30] ({},{}) circle ({});
+	\\draw[vector] ({},{}) -- ++({},{});
+	\\draw[vector] ({},{}) -- ++({},{});
+	\\draw[draw=col1, fill=col1!30] ({},{}) circle ({});
+	\\draw[draw=col2, fill=col2!30] ({},{}) circle ({});
+	\\draw[vector] ({},{}) -- ++({},{});
+	\\draw[vector] ({},{}) -- ++({},{});
+\\end{{tikzpicture}}
+""".format(
+						x1, y1, x1_, y1_,
+						x2, y2, x2_, y2_,
+						x1, y1, R1,
+						x2, y2, R2,
+						x1, y1, v1x, v1y,
+						x2, y2, v2x, v2y,
+						x1_, y1_, R1,
+						x2_, y2_, R2,
+						x1_, y1_, v1_x, v1_y,
+						x2_, y2_, v2_x, v2_y,
+					)
+print(drawstr)
+\end{pycode}
+\end{document}
