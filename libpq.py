@@ -21,6 +21,13 @@ def normalize(vec):
     except:
         return 0.0
 
+def tripleroduct(v1, v2, v3):
+    """
+    Return a special triple product
+    of the vectors v1, v2 and v3.
+    """
+    return np.sum([a*b*c for a, b, c in zip(v1, v2, v3)])
+
 
 ####################
 # Helper functions #
@@ -71,33 +78,7 @@ def time_to_pw_collision(p, w):
     p collides with the wall w.
     NOTE: NOT CORRECT! SHOULD BE RE-WRITTEN.
     """
-    p0 = w.center
-    n = w.normal
-    l = p.vel
-    l0 = p.pos
-    l_n = np.dot(l, n)
-    if l_n == 0:
-        return inf
-    else:
-        # Time to collision
-        t = ((p0-l0)*n) / np.dot(l, n)
-
-        # Position of collision
-        d = l0 + l*t
-
-        # Verifiying that d is inside the wall
-        # by projecting the vector from d to
-        # the center of the wall on the wall's
-        # direction vectors.
-        D = d - p0
-        a = np.dot(D, normalize(w.d1))
-        b = np.dot(D, normalize(w.d2))
-
-        # Return t if D is inside the wall, inf otherwise.
-        if a <= np.linalg.norm(w.d1) and b <= np.linalg.norm(w.d2):
-            return t
-        else:
-            return inf
+    pass
 
 def pw_collision(p, w):
     """
@@ -190,20 +171,4 @@ if __name__ == '__main__':
     while not q.empty():
         q.get().print()
     """
-
-    t = inf
-    while t == inf or t < 0.5 or t > 10:
-        p1 = Particle(
-                pos = np.random.uniform(-10, 10, 2),
-                vel = np.random.uniform(-4, 4, 2),
-                mass = np.random.uniform(1, 5),
-                radius = np.random.uniform(0.25, 1.5),
-                )
-        p2 = Particle(
-                pos = np.random.uniform(-10, 10, 2),
-                vel = np.random.uniform(-4, 4, 2),
-                mass = np.random.uniform(1, 5),
-                radius = np.random.uniform(0.25, 1.5),
-                )
-
-        t = time_to_pp_collision(p1, p2)
+    pass

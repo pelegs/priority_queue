@@ -58,7 +58,10 @@
 
 \begin{document}
 \maketitle
+
+%% ----- Particle-Particle ----- %%
 \section{Collision of Two Spherical Particles Moving at Constant Velocities}
+\subsection{Time to Collision}
 Two spherical particles with radii $R_{1}$ and $R_{2}$, have initial positions $\bm{x}^{0}_{1}$ and $\bm{x}^{0}_{2}$ and move with constant velocities $\bm{v}_{1}$ and $\bm{v}_{2}$, respectively. At what time, if at all, will they collide?
 
 \begin{figure}[H]
@@ -133,7 +136,76 @@ or in explicit vector form
 		\label{eq:if_collision}
 	\end{equation}
 
+\subsection{Veclocity Change}
+
+%% ----- Particle-Wall ----- %%
 \section{Collision of a Spherical Particle and a Planar Wall}
+\subsection{Definition of a Planar Wall}
+A plane can be defined by a point and a direction normal to the plane. However, we wish to use only a finite part of the plane. We therefore define a wall using a point $\bm{\sigma}$ and two orthogonal vectors $\bm{d}_{1}$ and $\bm{d}_{2}$:
+
+\begin{figure}[H]
+	\centering
+	\tdplotsetmaincoords{110}{20}
+	\begin{tikzpicture}[tdplot_main_coords]
+		\Large
+		\draw[thick, fill=col3!30] (-3,-3,0) -- (3,-3,0) -- (3,3,0) -- (-3,3,0) -- cycle;
+		\draw (0,-0.5,0) -- (0.5,-0.5,0) -- (0.5,0,0);
+		\draw[vector, col4] (0,0,0) -- node [midway, below] {$\bm{d}_{1}$} (3,0,0);
+		\draw[vector, col5] (0,0,0) -- node [midway, left] {$\bm{d}_{2}$} (0,-3,0);
+		\filldraw (0,0,0) circle (0.1) node [below left] {$\bm{\sigma}$};
+	\end{tikzpicture}
+\end{figure}
+
+The normal to the wall surface can then be defined as
+\begin{equation}
+	\bm{\hat{n}} = \frac{\bm{d}_{1} \times \bm{d}_{2}}{\Norm{\bm{d}_{1} \times \bm{d}_{2}}}.
+	\label{eq:surfce_norm}
+\end{equation}
+
+\subsection{Time to Collision}
+The distance $d$ between a spherical particle and a wall can be calculated as the distance between its center (a point) and the plane of which the wall is a part of. This distance is the projection of the vector $\bm{x}-\bm{\sigma}$ onto $\bm{\hat{n}}$:
+
+\begin{figure}[H]
+	\centering
+	\tdplotsetmaincoords{110}{20}
+	\begin{tikzpicture}[tdplot_main_coords]
+		\Large
+		\draw[thick, dashed, cap=round, fill=col3, opacity=0.3] (-3,-3,0) -- (3,-3,0) -- (3,3,0) -- (-3,3,0) -- cycle;
+		\coordinate (x) at (2,-2,2);
+		\coordinate (x_) at ($(x)-(0,0,2)$);
+		\draw[vector, thick, col2] (0,0,0) -- (x);
+		\draw[thick, densely dotted, col1!60] (x) -- (x_) node [midway, right] {$d$};
+		\node[draw=none, shape=circle, fill=col1, inner sep=1.5pt] at (x) {};
+		\node[right of=x, xshift=-5mm, text=col1] {$\bm{x}$};
+		\draw[thick, col1!60] (x_) -- (0,0,0);
+		\filldraw (0,0,0) circle (0.1) node [below left] {$\bm{\sigma}$};
+		\draw[vector] (0,0,0) -- (0,0,1) node [left, yshift=-2mm] {$\bm{\hat{n}}$};
+	\end{tikzpicture}
+\end{figure}
+
+Using the dot product, it can be written as
+\begin{equation}
+	d = \innerp{\bm{x}-\bm{\sigma}}{\bm{\hat{n}}},
+	\label{eq:d_value}
+\end{equation}
+since $\Norm{\bm{\hat{n}}} = 1$.
+
+In order to have a concise notation for the following part, we define two new concepts:
+\begin{enumerate}
+	\item \textbf{Squared vector}:
+	\begin{equation}
+		\bm{v}=\colvec{4}{v_{1}}{v_{2}}{\vdots}{v_{n}} \Rightarrow \bm{v}^{2} \equiv \colvec{4}{v_{1}^{2}}{v_{2}^{2}}{\vdots}{v_{n}^{2}}.
+		\label{eq:sqr_vec}
+	\end{equation}
+
+	\item \textbf{Speical triple product}: the triple product of three vectors $\bm{u},\ \bm{v},\ \bm{w}$ is
+	\begin{equation}
+		\left[ \bm{u},\bm{v},\bm{w} \right] \equiv \sum\limits_{i=1}^{n} u_{i}v_{i}w_{i}.
+		\label{eq:triple_prod}
+	\end{equation}
+\end{enumerate}
+
+\subsection{Velocity Change}
 \begin{figure}[H]
 	\centering
 	\tdplotsetmaincoords{110}{20}
@@ -145,11 +217,6 @@ or in explicit vector form
 		\draw[vector, col1] (-2,-1,3) -- (0,0,0) node [midway, above right] {$\bm{v}$};
 	\end{tikzpicture}
 \end{figure}
-
-\subsection{Time to Collision}
-Using point-plane distance.
-
-\subsection{Velocity Change}
 The projection of $\bm{v}$ onto $\bm{\hat{n}}$ is
 \begin{equation}
 	\text{proj}_{\bm{\hat{n}}}\bm{v} = \innerp{\bm{v}}{\bm{\hat{n}}}\bm{\hat{n}},
