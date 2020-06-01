@@ -16,71 +16,130 @@
 \begin{document}
 \tikzset{
 	vector/.style={->, >=stealth, very thick, cap=round},
-	dline/.style={dotted, cap=round}
+	dline/.style={dotted, cap=round},
+	wall/.style={very thick},
 }
+
+%\begin{pycode}
+%from math import inf
+%from libpq import *
+%
+%t = inf
+%while t == inf or t < 0.5 or t > 10:
+%		p1 = Particle(
+%						pos = np.zeros(2),
+%						vel = np.random.uniform(-2, 2, 2),
+%						radius = np.random.uniform(0.2, 2),
+%						)
+%		p2 = Particle(
+%						pos = np.random.uniform(-20, 20, 2),
+%						vel = np.random.uniform(-1, 1, 2),
+%						radius = np.random.uniform(0.2, 2),
+%						)
+%		p1.mass = p1.radius
+%		p2.mass = p2.radius
+%
+%		t = time_to_pp_collision(p1, p2)
+%
+%# Params before
+%x1, y1 = p1.pos
+%v1x, v1y = p1.vel
+%m1, R1 = p1.mass, p1.radius
+%x2, y2 = p2.pos
+%v2x, v2y = p2.vel
+%m2, R2 = p2.mass, p2.radius
+%
+%# Params after
+%p1.move(t)
+%p2.move(t)
+%x1_, y1_ = p1.pos
+%x2_, y2_ = p2.pos
+%u1, u2 = pp_collision(p1, p2)
+%v1_x, v1_y = u1
+%v2_x, v2_y = u2
+%
+%drawstr = """
+%\\begin{{tikzpicture}}
+%	\\draw[dline] ({},{}) -- ({},{});
+%	\\draw[dline] ({},{}) -- ({},{});
+%	\\draw[draw=col1, fill=col1!30] ({},{}) circle ({});
+%	\\draw[draw=col2, fill=col2!30] ({},{}) circle ({});
+%	\\draw[vector] ({},{}) -- ++({},{});
+%	\\draw[vector] ({},{}) -- ++({},{});
+%	\\draw[draw=col1, fill=col1!30] ({},{}) circle ({});
+%	\\draw[draw=col2, fill=col2!30] ({},{}) circle ({});
+%	\\draw[vector] ({},{}) -- ++({},{});
+%	\\draw[vector] ({},{}) -- ++({},{});
+%\\end{{tikzpicture}}
+%""".format(
+%						x1, y1, x1_, y1_,
+%						x2, y2, x2_, y2_,
+%						x1, y1, R1,
+%						x2, y2, R2,
+%						x1, y1, v1x, v1y,
+%						x2, y2, v2x, v2y,
+%						x1_, y1_, R1,
+%						x2_, y2_, R2,
+%						x1_, y1_, v1_x, v1_y,
+%						x2_, y2_, v2_x, v2_y,
+%					)
+%print(drawstr)
+%\end{pycode}
 
 \begin{pycode}
 from math import inf
 from libpq import *
 
 t = inf
-while t == inf or t < 0.5 or t > 10:
-		p1 = Particle(
+while t == inf or t < 1 or t > 20:
+		p = Particle(
 						pos = np.zeros(2),
 						vel = np.random.uniform(-2, 2, 2),
-						radius = np.random.uniform(0.2, 2),
+						radius = np.random.uniform(0.5, 1),
 						)
-		p2 = Particle(
-						pos = np.random.uniform(-20, 20, 2),
-						vel = np.random.uniform(-1, 1, 2),
-						radius = np.random.uniform(0.2, 2),
+		w = Wall(
+						center = np.random.uniform(-20,20,2),
+						d1 = np.random.uniform(-10,10,2)
 						)
-		p1.mass = p1.radius
-		p2.mass = p2.radius
+		t = time_to_pw_collision(p, w)
 
-		t = time_to_pp_collision(p1, p2)
+wcx, wcy = w.center
+wd1x, wd1y = w.d1
+wnx, wny = w.normal
+px, py = p.pos
+pvx, pvy = p.vel
+R = p.radius
+x_s = p.pos + p.vel*(t + p.radius/np.linalg.norm(p.vel))
+x_s_x, x_s_y = x_s
 
-# Params before
-x1, y1 = p1.pos
-v1x, v1y = p1.vel
-m1, R1 = p1.mass, p1.radius
-x2, y2 = p2.pos
-v2x, v2y = p2.vel
-m2, R2 = p2.mass, p2.radius
-
-# Params after
-p1.move(t)
-p2.move(t)
-x1_, y1_ = p1.pos
-x2_, y2_ = p2.pos
-u1, u2 = pp_collision(p1, p2)
-v1_x, v1_y = u1
-v2_x, v2_y = u2
+# Advance particle
+p.move(t)
+px_, py_ = p.pos
+p.vel = pw_collision(p, w)
+pvx_, pvy_ = p.vel
 
 drawstr = """
 \\begin{{tikzpicture}}
 	\\draw[dline] ({},{}) -- ({},{});
-	\\draw[dline] ({},{}) -- ({},{});
-	\\draw[draw=col1, fill=col1!30] ({},{}) circle ({});
-	\\draw[draw=col2, fill=col2!30] ({},{}) circle ({});
-	\\draw[vector] ({},{}) -- ++({},{});
+	\\draw[wall] ({},{}) -- ++({},{});
+	\\draw[wall] ({},{}) -- ++({},{});
 	\\draw[vector] ({},{}) -- ++({},{});
 	\\draw[draw=col1, fill=col1!30] ({},{}) circle ({});
-	\\draw[draw=col2, fill=col2!30] ({},{}) circle ({});
 	\\draw[vector] ({},{}) -- ++({},{});
+	\\draw[draw=col1, fill=col1!30] ({},{}) circle ({});
 	\\draw[vector] ({},{}) -- ++({},{});
+	\\draw[fill=col1] ({},{}) circle (0.2);
 \\end{{tikzpicture}}
 """.format(
-						x1, y1, x1_, y1_,
-						x2, y2, x2_, y2_,
-						x1, y1, R1,
-						x2, y2, R2,
-						x1, y1, v1x, v1y,
-						x2, y2, v2x, v2y,
-						x1_, y1_, R1,
-						x2_, y2_, R2,
-						x1_, y1_, v1_x, v1_y,
-						x2_, y2_, v2_x, v2_y,
+						px, py, px_, py_,
+						wcx, wcy, wd1x, wd1y,
+						wcx, wcy, -wd1x, -wd1y,
+						wcx, wcy, wnx, wny,
+						px, py, R,
+						px, py, pvx, pvy,
+						px_, py_, R,
+						px_, py_, pvx_, pvy_,
+						x_s_x, x_s_y,
 					)
 print(drawstr)
 \end{pycode}

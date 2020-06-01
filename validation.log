@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.2.27)  1 JUN 2020 00:21
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.2.27)  1 JUN 2020 18:48
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -549,15 +549,15 @@ Package newfloat Info: float type `listing'=8 on input line 16.
 ]
 (./validation.aux) ) 
 Here is how much of TeX's memory you used:
- 15302 strings out of 480997
- 308298 string characters out of 5912179
- 539990 words of memory out of 5000000
- 30544 multiletter control sequences out of 15000+600000
+ 15299 strings out of 480997
+ 308272 string characters out of 5912179
+ 539992 words of memory out of 5000000
+ 30541 multiletter control sequences out of 15000+600000
  532338 words of font info for 24 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,5n,60p,847b,867s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,5n,60p,847b,871s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on validation.pdf (1 page, 1682 bytes).
+Output written on validation.pdf (1 page, 1537 bytes).
 PDF statistics:
  11 PDF objects out of 1000 (max. 8388607)
  7 compressed objects within 1 object stream

@@ -76,9 +76,40 @@ def time_to_pw_collision(p, w):
     """
     Returns the time at which the particle
     p collides with the wall w.
-    NOTE: NOT CORRECT! SHOULD BE RE-WRITTEN.
     """
-    pass
+    vn = np.dot(p.vel, w.normal)
+    if vn == 0:
+        return inf
+    else:
+        t1 = (+p.radius - np.dot(p.pos-w.center, w.normal)) / vn
+        t2 = (-p.radius - np.dot(p.pos-w.center, w.normal)) / vn
+        t = min(t1, t2)
+        
+        # contact point on plane
+        x_s = p.pos + p.vel*(t + p.radius/np.linalg.norm(p.vel))
+
+        # projections of contact point
+        # on each directions of plane
+        wd1_norm = np.linalg.norm(w.d1)
+        wd2_norm = np.linalg.norm(w.d2)
+        x_s_d1 = abs(np.dot(x_s, w.d1) / wd1_norm)
+        if wd2_norm == 0:
+            x_s_d2 = 0.0
+        else:
+            x_s_d2 = abs(np.dot(x_s, w.d2) / wd2_norm)
+
+        
+        # verifying that the contact point is
+        # within the wall
+        if x_s_d1 <= wd1_norm and\
+           x_s_d2 <= wd2_norm:
+            with open('temp.txt', 'a') as f:
+                f.write('{}, {}\n'.format(x_s_d1, np.linalg.norm(w.d1)))
+            return t
+        else:
+            with open('temp.txt', 'a') as f:
+                f.write('{}, {}\n'.format(x_s_d1, np.linalg.norm(w.d1)))
+            return inf
 
 def pw_collision(p, w):
     """
@@ -86,9 +117,6 @@ def pw_collision(p, w):
     after a collision with a wall.
     """
     return p.vel - 2*np.dot(p.vel, w.normal)*w.normal
-
-def bla(d, n):
-    return d - 2*np.dot(d, n)*n
 
 
 ###########
@@ -114,11 +142,22 @@ class Particle:
 
 
 class Wall:
-    def __init__(self, center, d1, d2):
+    def __init__(self, center, d1, d2=None):
         self.center = center
         self.d1 = d1
-        self.d2 = d2
-        self.normal = normalize(np.cross(d1, d2))
+
+        # Set surface normal.
+        # If 3D, by cross product.
+        # If 2D, set d2 to (0,0,1), do as 3D,
+        # and truncate to 2D.
+        if d1.shape[0] == 3:
+            self.d2 = d2
+            self.normal = -normalize(np.cross(d1, self.d2))
+        elif d1.shape[0] == 2:
+            D1 = np.append(d1, 0)
+            D2 = np.array([0,0,1])
+            self.normal = -normalize(np.cross(D1, D2))[:2]
+            self.d2 = np.zeros(2)
 
 
 class Event:
@@ -171,4 +210,17 @@ if __name__ == '__main__':
     while not q.empty():
         q.get().print()
     """
-    pass
+
+    t = inf
+    while t == inf or t < 1 or t > 20:
+        p = Particle(
+                pos = np.zeros(2),
+                vel = np.random.uniform(-2, 2, 2),
+                radius = np.random.uniform(0.2, 2),
+                )
+        w = Wall(
+                center = np.random.uniform(-100,100,2),
+                d1 = np.random.uniform(-1,1,2)
+                )
+        t = time_to_pw_collision(p, w)
+    print(t)
