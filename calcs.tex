@@ -190,20 +190,25 @@ Using the dot product, it can be written as
 \end{equation}
 since $\Norm{\bm{\hat{n}}} = 1$.
 
-In order to have a concise notation for the following part, we define two new concepts:
-\begin{enumerate}
-	\item \textbf{Squared vector}:
-	\begin{equation}
-		\bm{v}=\colvec{4}{v_{1}}{v_{2}}{\vdots}{v_{n}} \Rightarrow \bm{v}^{2} \equiv \colvec{4}{v_{1}^{2}}{v_{2}^{2}}{\vdots}{v_{n}^{2}}.
-		\label{eq:sqr_vec}
-	\end{equation}
+The position of the sphere as a function of time is
+\begin{equation}
+	\bm{x}(t) = \bm{x}^{0} + \bm{v}t,
+	\label{eq:pos_time}
+\end{equation}
+and thus
+\begin{align}
+	d &= \innerp{\bm{x}^{0}+\bm{v}t - \bm{\sigma}}{\bm{\hat{n}}}\nonumber\\
+	&= \innerp{\bm{x}^{0}-\bm{\sigma}}{\bm{\hat{n}}} + \innerp{\bm{v}}{\sigma}t,
+	\label{eq:distance_time}
+\end{align}
+and the solution for $d=R$ becomes
+\begin{equation}
+	t = \frac{R-\innerp{\bm{x}^{0}-\bm{\sigma}}{\bm{\hat{n}}}}{\innerp{\bm{v}}{\bm{\hat{n}}}}.
+	\label{eq:time_to_pw_collision}
+\end{equation}
+(note that both innerproducts implicitely contain a division by $\norm{\bm{\hat{n}}}$, and so the units match)
 
-	\item \textbf{Speical triple product}: the triple product of three vectors $\bm{u},\ \bm{v},\ \bm{w}$ is
-	\begin{equation}
-		\left[ \bm{u},\bm{v},\bm{w} \right] \equiv \sum\limits_{i=1}^{n} u_{i}v_{i}w_{i}.
-		\label{eq:triple_prod}
-	\end{equation}
-\end{enumerate}
+PROJECTION OF XSIGMA ON D1, D2.
 
 \subsection{Velocity Change}
 \begin{figure}[H]
