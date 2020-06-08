@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.2.27)  1 JUN 2020 20:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019) (preloaded format=pdflatex 2020.2.27)  8 JUN 2020 21:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -377,6 +377,27 @@ File: pgfmodulematrix.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 s/tikzlibrarytopaths.code.tex
 File: tikzlibrarytopaths.code.tex 2020/01/08 v3.1.5b (3.1.5b)
 )))
+(/usr/local/texlive/2019/texmf-dist/tex/latex/tikz-3dplot/tikz-3dplot.sty
+(/usr/local/texlive/2019/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrarycalc.code.tex
+File: tikzlibrarycalc.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)
+(/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibrary3d.code.tex
+File: tikzlibrary3d.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+)
+(/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/frontendlayer/tikz/librarie
+s/tikzlibraryarrows.code.tex
+File: tikzlibraryarrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+
+(/usr/local/texlive/2019/texmf-dist/tex/generic/pgf/libraries/pgflibraryarrows.
+code.tex
+File: pgflibraryarrows.code.tex 2020/01/08 v3.1.5b (3.1.5b)
+\arrowsize=\dimen187
+)))
 (/usr/local/texlive/2019/texmf-dist/tex/latex/pythontex/pythontex.sty
 Package: pythontex 2019/09/22 v0.17 execute and typeset Python code and other l
 anguages
@@ -384,9 +405,6 @@ anguages
 (/usr/local/texlive/2019/texmf-dist/tex/latex/fvextra/fvextra.sty
 Package: fvextra 2019/02/04 v1.4 fvextra - extensions and patches for fancyvrb
 
-(/usr/local/texlive/2019/texmf-dist/tex/latex/base/ifthen.sty
-Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
-)
 (/usr/local/texlive/2019/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count199
@@ -409,16 +427,16 @@ Package: lineno 2005/11/02 line numbers on paragraphs v4.41
 \linenopenalty=\count269
 \output=\toks28
 \linenoprevgraf=\count270
-\linenumbersep=\dimen187
-\linenumberwidth=\dimen188
+\linenumbersep=\dimen188
+\linenumberwidth=\dimen189
 \c@linenumber=\count271
 \c@pagewiselinenumber=\count272
 \c@LN@truepage=\count273
 \c@internallinenumber=\count274
 \c@internallinenumbers=\count275
-\quotelinenumbersep=\dimen189
-\bframerule=\dimen190
-\bframesep=\dimen191
+\quotelinenumbersep=\dimen190
+\bframerule=\dimen191
+\bframesep=\dimen192
 \bframebox=\box58
 LaTeX Info: Redefining \\ on input line 3056.
 )
@@ -430,20 +448,20 @@ LaTeX Info: Redefining \\ on input line 3056.
 \c@FV@HighlightLinesStop=\count279
 \FV@LoopCount=\count280
 \FV@NCharsBox=\box60
-\FV@BreakIndent=\dimen192
+\FV@BreakIndent=\dimen193
 \FV@BreakIndentNChars=\count281
-\FV@BreakSymbolSepLeft=\dimen193
+\FV@BreakSymbolSepLeft=\dimen194
 \FV@BreakSymbolSepLeftNChars=\count282
-\FV@BreakSymbolSepRight=\dimen194
+\FV@BreakSymbolSepRight=\dimen195
 \FV@BreakSymbolSepRightNChars=\count283
-\FV@BreakSymbolIndentLeft=\dimen195
+\FV@BreakSymbolIndentLeft=\dimen196
 \FV@BreakSymbolIndentLeftNChars=\count284
-\FV@BreakSymbolIndentRight=\dimen196
+\FV@BreakSymbolIndentRight=\dimen197
 \FV@BreakSymbolIndentRightNChars=\count285
 \c@FancyVerbLineBreakLast=\count286
 \FV@LineBox=\box61
 \FV@LineIndentBox=\box62
-\FV@LineWidth=\dimen197
+\FV@LineWidth=\dimen198
 )
 (/usr/local/texlive/2019/texmf-dist/tex/generic/xstring/xstring.sty
 (/usr/local/texlive/2019/texmf-dist/tex/generic/xstring/xstring.tex
@@ -497,31 +515,31 @@ File: l3backend-pdfmode.def 2020-02-23 L3 backend support: PDF mode
 (./validation.aux)
 \openout1 = `validation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
  ABD: EveryShipout initializing macros
 (/usr/local/texlive/2019/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count298
-\scratchdimen=\dimen198
+\scratchdimen=\dimen199
 \scratchbox=\box64
 \nofMPsegments=\count299
 \nofMParguments=\count300
 \everyMPshowfont=\toks31
 \MPscratchCnt=\count301
-\MPscratchDim=\dimen199
+\MPscratchDim=\dimen256
 \MPnumerator=\count302
 \makeMPintoPDFobject=\count303
 \everyMPtoPDFconversion=\toks32
@@ -536,28 +554,30 @@ e
 ))
 (./pythontex-files-validation/validation.pytxmcr)
 Package newfloat Info: New float `listing' with options `fileext=lopytx' on inp
-ut line 16.
+ut line 17.
 \c@listing=\count304
 \newfloat@ftype=\count305
-Package newfloat Info: float type `listing'=8 on input line 16.
+Package newfloat Info: float type `listing'=8 on input line 17.
 
 (./pythontex-files-validation/validation.pytxpyg)
 \c@pytx@py@default@default@line=\count306
 
-(./pythontex-files-validation/py_default_default_0.stdout) [1
+(./pythontex-files-validation/py_default_default_1.stdout)
+(./pythontex-files-validation/py_default_default_2.stdout)
+(./pythontex-files-validation/py_default_default_3.stdout) [1
 
 ]
 (./validation.aux) ) 
 Here is how much of TeX's memory you used:
- 15298 strings out of 480997
- 308228 string characters out of 5912179
- 539992 words of memory out of 5000000
- 30540 multiletter control sequences out of 15000+600000
+ 16139 strings out of 480997
+ 328465 string characters out of 5912179
+ 556596 words of memory out of 5000000
+ 31358 multiletter control sequences out of 15000+600000
  532338 words of font info for 24 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 60i,5n,60p,847b,871s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 60i,5n,60p,847b,930s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on validation.pdf (1 page, 1540 bytes).
+Output written on validation.pdf (1 page, 1428 bytes).
 PDF statistics:
  11 PDF objects out of 1000 (max. 8388607)
  7 compressed objects within 1 object stream

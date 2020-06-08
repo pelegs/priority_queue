@@ -1,5 +1,6 @@
 \documentclass{standalone}
 \usepackage{tikz}
+\usepackage{tikz-3dplot}
 \tikzset{vector/.style={->, >=stealth, very thick, cap=round}}
 \definecolor{col0}{HTML}{FFFFFF}
 \definecolor{col1}{HTML}{FF7878}
@@ -86,61 +87,91 @@
 %print(drawstr)
 %\end{pycode}
 
+%\begin{pycode}
+%from math import inf
+%from libpq import *
+%
+%t = inf
+%while t == inf or t < 1 or t > 20:
+%		p = Particle(
+%						pos = np.zeros(2),
+%						vel = np.random.uniform(-2, 2, 2),
+%						radius = np.random.uniform(0.5, 1),
+%						)
+%		w = Wall(
+%						center = np.random.uniform(-20,20,2),
+%						d1 = np.random.uniform(-10,10,2)
+%						)
+%		t = time_to_pw_collision(p, w)
+%
+%wcx, wcy = w.center
+%wd1x, wd1y = w.d1
+%wnx, wny = w.normal
+%px, py = p.pos
+%pvx, pvy = p.vel
+%R = p.radius
+%x_s = p.pos + p.vel*(t + p.radius/np.linalg.norm(p.vel))
+%x_s_x, x_s_y = x_s
+%
+%# Advance particle
+%p.move(t)
+%px_, py_ = p.pos
+%p.vel = pw_collision(p, w)
+%pvx_, pvy_ = p.vel
+%
+%drawstr = """
+%\\begin{{tikzpicture}}
+%	\\draw[dline] ({},{}) -- ({},{});
+%	\\draw[wall] ({},{}) -- ++({},{});
+%	\\draw[wall] ({},{}) -- ++({},{});
+%	\\draw[vector] ({},{}) -- ++({},{});
+%	\\draw[draw=col1, fill=col1!30] ({},{}) circle ({});
+%	\\draw[vector] ({},{}) -- ++({},{});
+%	\\draw[draw=col1, fill=col1!30] ({},{}) circle ({});
+%	\\draw[vector] ({},{}) -- ++({},{});
+%	\\draw[fill=col1] ({},{}) circle (0.2);
+%\\end{{tikzpicture}}
+%""".format(
+%						px, py, px_, py_,
+%						wcx, wcy, wd1x, wd1y,
+%						wcx, wcy, -wd1x, -wd1y,
+%						wcx, wcy, wnx, wny,
+%						px, py, R,
+%						px, py, pvx, pvy,
+%						px_, py_, R,
+%						px_, py_, pvx_, pvy_,
+%						x_s_x, x_s_y,
+%					)
+%print(drawstr)
+%\end{pycode}
+
 \begin{pycode}
 from math import inf
 from libpq import *
 
-t = inf
-while t == inf or t < 1 or t > 20:
-		p = Particle(
-						pos = np.zeros(2),
-						vel = np.random.uniform(-2, 2, 2),
-						radius = np.random.uniform(0.5, 1),
-						)
-		w = Wall(
-						center = np.random.uniform(-20,20,2),
-						d1 = np.random.uniform(-10,10,2)
-						)
-		t = time_to_pw_collision(p, w)
+w1 = Wall(
+			center = np.array([4,4,0]),
+			d1 = np.array([4,0,0]),
+			d2 = np.array([0,4,0])
+		)
 
-wcx, wcy = w.center
-wd1x, wd1y = w.d1
-wnx, wny = w.normal
-px, py = p.pos
-pvx, pvy = p.vel
-R = p.radius
-x_s = p.pos + p.vel*(t + p.radius/np.linalg.norm(p.vel))
-x_s_x, x_s_y = x_s
+w2 = Wall(
+			center = np.array([4,0,4]),
+			d1 = np.array([4,0,0]),
+			d2 = np.array([0,0,4])
+		)
 
-# Advance particle
-p.move(t)
-px_, py_ = p.pos
-p.vel = pw_collision(p, w)
-pvx_, pvy_ = p.vel
-
-drawstr = """
-\\begin{{tikzpicture}}
-	\\draw[dline] ({},{}) -- ({},{});
-	\\draw[wall] ({},{}) -- ++({},{});
-	\\draw[wall] ({},{}) -- ++({},{});
-	\\draw[vector] ({},{}) -- ++({},{});
-	\\draw[draw=col1, fill=col1!30] ({},{}) circle ({});
-	\\draw[vector] ({},{}) -- ++({},{});
-	\\draw[draw=col1, fill=col1!30] ({},{}) circle ({});
-	\\draw[vector] ({},{}) -- ++({},{});
-	\\draw[fill=col1] ({},{}) circle (0.2);
-\\end{{tikzpicture}}
-""".format(
-						px, py, px_, py_,
-						wcx, wcy, wd1x, wd1y,
-						wcx, wcy, -wd1x, -wd1y,
-						wcx, wcy, wnx, wny,
-						px, py, R,
-						px, py, pvx, pvy,
-						px_, py_, R,
-						px_, py_, pvx_, pvy_,
-						x_s_x, x_s_y,
-					)
-print(drawstr)
+w3 = Wall(
+			center = np.array([0,4,4]),
+			d1 = np.array([0,4,0]),
+			d2 = np.array([0,0,4])
+		)
 \end{pycode}
+
+\tdplotsetmaincoords{70}{140}
+\begin{tikzpicture}[tdplot_main_coords]
+	\pyc{w1.tikz_draw(draw_dirvecs=True)}
+	\pyc{w2.tikz_draw(draw_dirvecs=True)}
+	\pyc{w3.tikz_draw(draw_dirvecs=True)}
+\end{tikzpicture}
 \end{document}

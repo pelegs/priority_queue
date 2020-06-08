@@ -1,0 +1,6 @@
+
+        \draw[wall, fill=col3!30] (8,0,8) -- (8,0,0) -- (0,0,0) -- (0,0,8) -- cycle;
+              
+            \draw[vector, ultra thick, col1] (4,0,4) -- ++(4,0,0);
+            \draw[vector, ultra thick, col2] (4,0,4) -- ++(0,0,4);
+            

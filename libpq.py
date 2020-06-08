@@ -153,11 +153,40 @@ class Wall:
         if d1.shape[0] == 3:
             self.d2 = d2
             self.normal = -normalize(np.cross(d1, self.d2))
+            self.vertices = [
+                    self.center + self.d1 + self.d2,
+                    self.center + self.d1 - self.d2,
+                    self.center - self.d1 - self.d2,
+                    self.center - self.d1 + self.d2
+                    ]
+                    
         elif d1.shape[0] == 2:
             D1 = np.append(d1, 0)
             D2 = np.array([0,0,1])
             self.normal = -normalize(np.cross(D1, D2))[:2]
             self.d2 = np.zeros(2)
+
+    def tikz_draw(self, fill='col3!30', draw_dirvecs=False):
+        drawstr = """
+        \\draw[wall, fill={}] ({},{},{}) -- ({},{},{}) -- ({},{},{}) -- ({},{},{}) -- cycle;
+              """.format(
+                      fill,
+                      self.vertices[0][0], self.vertices[0][1], self.vertices[0][2],
+                      self.vertices[1][0], self.vertices[1][1], self.vertices[1][2],
+                      self.vertices[2][0], self.vertices[2][1], self.vertices[2][2],
+                      self.vertices[3][0], self.vertices[3][1], self.vertices[3][2],
+                      )
+        if draw_dirvecs:
+            drawstr += """
+            \\draw[vector, ultra thick, col1] ({},{},{}) -- ++({},{},{});
+            \\draw[vector, ultra thick, col2] ({},{},{}) -- ++({},{},{});
+            """.format(
+                    self.center[0], self.center[1], self.center[2],
+                    self.d1[0], self.d1[1], self.d1[2],
+                    self.center[0], self.center[1], self.center[2],
+                    self.d2[0], self.d2[1], self.d2[2],
+                    )
+        print(drawstr)
 
 
 class Event:
